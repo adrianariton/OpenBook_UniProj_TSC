@@ -1,4 +1,4 @@
-# Ariton Adrian TSC - proiect
+# Ariton Adrian TSC - OpenBook Reader
 
 ## Implementation steps
 
