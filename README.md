@@ -89,6 +89,43 @@
 * Main power and data input.
 * Includes TVS diodes for ESD protection.
 
+
+# Block Diagram: Schematic Design
+
+```plaintext
+          +------------------+
+          |     Battery      |
+          +--------+---------+
+                   |
+                   v
+          +------------------+
+          |   Charging IC    |<-- USB-C Power
+          +--------+---------+
+                   |
+                   v
+          +------------------+
+          |       LDO        |--> 3.3V
+          +--------+---------+
+                   |
+    +--------------+-------------------+-------------------+
+    |              |                   |                   |
+    v              v                   v                   v
++--------+   +-------------+   +----------------+   +-----------------+
+| ESP32  |<->|    Display   |<->|    BME688      |<->|  Tactile Buttons|
+|  -C6   |   |   (SPI: 4W)  |   |   (I2C Bus)    |   |   (GPIO + RC)   |
++--------+   +-------------+   +----------------+   +-----------------+
+     |               ^                 ^                     ^
+     |               |                 |                     |
+     |               |           Pull-up Resistors      Debouncing RC
+     |               |
+     v               |
++---------------------------+
+|     USB-C Connector       |
+| (USB Data ↔ ESP32 USB)    |
+| (ESD & Termination Prot.) |
++---------------------------+
+```
+
 ## 📡 Communication Interfaces
 
 | Interface | Connected Components       | ESP32-C6 Pins                       |
