@@ -25,31 +25,30 @@
 * Pins Used:
     * `SS_SD` → `IO4`
     * `MOSI` → `IO7`
-    * `MISO` → `IO26`
+    * `MISO` → `IO2`
     * `SCK` → `IO6`
 
 **E-Paper Display**
 * Interface: SPI
 * Pins Used:
-    * `EPD_CS` → `IO11`
+    * `EPD_CS` → `IO10`
     * `EPD_DC` → `IO5`
-    * `EPD_RST` → `IO21`
-    * `EPD_BUSY` → `IO26` (shared with `MISO`)
+    * `EPD_RST` → `IO23`
+    * `EPD_BUSY` → `IO3` (shared with `MISO`)
     * `MOSI`, `SCK` (shared with SD)
 
 **RTC Module - DS3231SN**
 * Interface: I2C
 * Pins Used:
-    * `SCL` → `IO20`
-    * `SDA` → `IO19`
+    * `SCL` → `IO22`
+    * `SDA` → `IO21`
     * `INT_RTC` → `IO8`
-    * `32KHZ` → `IO9`
-    * `RTC_RST` → `IO16`
+    * `32KHZ` → `IO1`
+    * `RTC_RST` → `IO18`
 
 **Environmental Sensor - BME688**
 * Interface: I2C (shared with RTC)
 * Power Supply: 3.3V
-* Pins Used: `IO19` (`SDA`), `IO20` (`SCL`)
 
 **External Flash - NORFlash64MB**
 * Interface: SPI
@@ -58,12 +57,12 @@
     * Rest (`MOSI`, `MISO`, `SCK`) shared
 
 **SD/USB interface**
-* `USB_D+` → `IO14`
-* `USB_D-` → `IO13`
+* `USB_D+` → `IO13`
+* `USB_D-` → `IO12`
 
 **Reset and Boot Buttons**
-* `IO/BOOT` → `IO15`
-* `RESET` → `IO3`
+* `IO/BOOT` → `IO9`
+* `RESET` → `EN`
 
 **Li-Po Battery Charging Controller**
 * TP4056 or similar
@@ -72,10 +71,7 @@
     * Battery ChargeLevel IC → I2C (`IO19`, `IO20`)
 
 **Qwiic / Stemma QT Connector**
-* Communicates entirely via I2C (`SCL`/`SDA` shared with RTC/BME688)
-* Environmental Sensor - BME688
-    * Protocol: I2C (shared)
-    * `IO19`/`IO20`
+* Communicates entirely via I2C
 
 **SPI ESD Protection Lines**
 * Protects the SPI lines for the SD card, e-paper, external flash.
@@ -130,11 +126,11 @@
 
 | Interface | Connected Components       | ESP32-C6 Pins                       |
 | :-------- | :------------------------- | :------------------------------------ |
-| SPI       | SD Card, E-paper, NOR Flash | `MOSI` (`IO7`), `MISO` (`IO26`), `SCK` (`IO6`), various `SS` |
-| I2C       | RTC, BME688, Battery Level | `SDA` (`IO19`), `SCL` (`IO20`)        |
-| UART      | Debugging / Flash          | `TX` (`IO24`), `RX` (`IO25`)        |
+| SPI       | SD Card, E-paper, NOR Flash | `MOSI` (`IO7`), `MISO` (`IO2`), `SCK` (`IO6`) |
+| I2C       | RTC, BME688, Battery Level | `SDA` (`IO22`), `SCL` (`IO21`)        |
+| UART      | Debugging / Flash          | `TX` (`gpio16`), `RX` (`gpio17`)        |
 | GPIO      | Buttons, status signals    | `IO0` - `IO23`                        |
-| USB       | PC connection / power      | `USB_D+`/`D-` (`IO14`/`IO13`)          |
+| USB       | PC connection / power      | `USB_D+`/`D-` (`IO13`/`IO12`)          |
 
 ## 🔋 Estimated Power Consumption
 
